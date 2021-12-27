@@ -1,0 +1,11 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build EmbeddecCMake GCC",
+      "type": "shell",
+      "isBackground": true,
+      "command": "cmake -Bbuild -DCMAKE_TOOLCHAIN_FILE=./cmake/arm_none_eabi_gcc.cmake -DCMAKE_BUILD_TYPE=Debug"
+    }
+  ]
+}
