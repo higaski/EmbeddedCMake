@@ -19,3 +19,17 @@ target_link_libraries(
   EmbeddedCMake
   PRIVATE --specs=nano.specs -Wl,--gc-sections,-Map=${PROJECT_NAME}.map
           -T${CMAKE_CURRENT_SOURCE_DIR}/STM32F746ZGTX_FLASH.ld)
+
+add_custom_command(
+  TARGET EmbeddedCMake
+  POST_BUILD
+  COMMAND ${CMAKE_COMMAND} -E copy ${PROJECT_NAME} ${PROJECT_NAME}.elf
+  COMMAND ${CMAKE_OBJCOPY} -O ihex ${PROJECT_NAME}
+          ${PROJECT_NAME}_${PROJECT_VERSION}.hex
+  COMMAND ${CMAKE_OBJCOPY} -O binary ${PROJECT_NAME}
+          ${PROJECT_NAME}_${PROJECT_VERSION}.bin
+  COMMAND ${CMAKE_OBJDUMP} --source --all-headers --demangle --line-numbers
+          --wide ${PROJECT_NAME} > ${PROJECT_NAME}.lst
+  COMMAND ${CMAKE_SIZE} --format=berkeley ${PROJECT_NAME} DEPENDS
+          ${PROJECT_NAME}
+  COMMENT "Generate .hex, .bin and .lst from .elf file")
