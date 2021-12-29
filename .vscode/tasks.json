@@ -6,6 +6,18 @@
       "type": "shell",
       "isBackground": true,
       "command": "cmake -Bbuild -DCMAKE_TOOLCHAIN_FILE=./cmake/arm_none_eabi_gcc.cmake -DCMAKE_BUILD_TYPE=Debug"
+    },
+    {
+      "label": "Build EmbeddecCMake Clang Make",
+      "type": "shell",
+      "isBackground": true,
+      "command": "cmake -Bbuild -DCMAKE_TOOLCHAIN_FILE=./cmake/arm_clang.cmake -DCMAKE_BUILD_TYPE=Debug"
+    },
+    {
+      "label": "Build EmbeddecCMake Clang Ninja",
+      "type": "shell",
+      "isBackground": true,
+      "command": "cmake -Bbuild -GNinja -DCMAKE_TOOLCHAIN_FILE=./cmake/arm_clang.cmake -DCMAKE_BUILD_TYPE=Debug"
     }
   ]
 }
